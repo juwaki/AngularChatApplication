@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { ChatMessage } from '../models/chat-message.model';
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
-import { Router, ActivatedRoute, Params } from '@angular/router'
-import { switchMap } from 'rxjs/operators';
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class ChatService {
   user: any;
   chatMessages: AngularFireList<ChatMessage>;
@@ -23,56 +20,71 @@ export class ChatService {
     private db: AngularFireDatabase,
     private afAuth: AngularFireAuth,
   ) {
-    // this.afAuth.authState.subscribe(auth => {
-    //   if (auth != undefined && auth != null) {
-    //     this.user = auth;
-    //   }
-    // });
-    //afList.push({ name: 'item' });
+    this.afAuth.authState.subscribe(auth => {
+      if (auth != undefined && auth != null) {
+        this.user = auth;
+      }
+
+      this.getUser().forEach((u) => {
+        this.userName = u[1];
+        console.log(this.userName);
+      });
+   
+    });
+  }
+
+  getUser() {
+    const userId = this.user.uid;
+    console.log(userId);
+    const path = `users/${userId}`;
+
+
+    this.db.list('users/userId')
+    const itemsRef: AngularFireList<ChatMessage> = this.db.list(path);
+    this.var1$ = itemsRef.snapshotChanges();
+    this.var2$ = itemsRef.valueChanges();
     
+
+    console.log("the users "+ this.var2$);
+    this.var2$.forEach((u, key) => {
+      console.log(u[2]);
+    });
+    return this.var2$;
+  }
+
+
+  getUsers() {
+    const userId = this.user.uid;
+    console.log(userId);
+    const path = `users/${userId}`;
+    return this.db.list(path);
   }
 
   sendMessage(msg: string) {
     const timeStamp = this.getTimeStamp();
-    //const email = this.user.email;
-    const email = 'test@example.com';
+    const email = this.user.email;
+    //const email = 'test@example.com';
 
     this.chatMessages = this.getMessages();
     var message = {
-      
+
       message: msg,
-      //timeSent: timeStamp,
-      //userName: this.userName,
-      userName: 'test-user',
+      timeSent: timeStamp,
+      userName: this.userName,
+      //userName: 'test-user',
       email: email
-            
+
     };
-
     const item = this.db.list('/messages');
-
     item.push(message);
-    // this.chatMessages.push({
-    //   message: msg,
-    //   //timeSent: timeStamp,
-    //   //userName: this.userName,
-    //   userName: 'test-user',
-    //   email: email
-    // });
-    
-    console.log('Called sendMessage()!')
-
   }
-
-
 
   getMessages(): AngularFireList<ChatMessage> {
     // query to create our message feed binding
-    const itemsRef: AngularFireList<ChatMessage>=this.db.list('/messages'); 
+    const itemsRef: AngularFireList<ChatMessage> = this.db.list('/messages');
     this.var1$ = itemsRef.snapshotChanges();
     this.var2$ = itemsRef.valueChanges();
-
     return this.var2$;
-     
   }
 
   getTimeStamp() {

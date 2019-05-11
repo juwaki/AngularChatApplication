@@ -20,9 +20,7 @@ export class FeedComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    
     this.feed$ = this.chat.getMessages();
-    console.log('1 -->', this.feed$)
   }
 
   ngOnChanges() {

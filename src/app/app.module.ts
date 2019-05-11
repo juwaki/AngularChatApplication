@@ -23,7 +23,7 @@ import { ChatService } from './services/chat.service';
 import { AuthService } from './services/auth.service';
 import { appRoutes } from 'src/routes';
 import { environment } from 'src/environments/environment';
-
+import * as firebase from 'firebase';
 
 
 
@@ -54,3 +54,17 @@ import { environment } from 'src/environments/environment';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// var config = {
+//   apiKey: "AIzaSyCJrvO4sUshn2SlHWC-yXohX4ipFEadsZc",
+//   authDomain: "chatapplication-b47db.firebaseapp.com",
+//   databaseURL: "https://chatapplication-b47db.firebaseio.com",
+//   projectId: "chatapplication-b47db",
+//   storageBucket: "chatapplication-b47db.appspot.com",
+//   messagingSenderId: "182895035852",
+//   appId: "1:182895035852:web:47e4ae46ca75c5ad"
+// };
+// firebase.initializeApp(config);
+
+// // Get a reference to the database service
+// var database = firebase.database();

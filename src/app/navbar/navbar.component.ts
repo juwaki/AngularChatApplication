@@ -20,5 +20,7 @@ export class NavbarComponent implements OnInit {
       this.userEmail = user.email;
     });
   }
-
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -11,6 +11,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
+
   private user: Observable<firebase.User>;
   private authState: any;
 
@@ -24,6 +25,10 @@ export class AuthService {
     return this.user;
   }
 
+  currentUserId() {
+    return this.afAuth.authState
+  }
+
 
   login(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
@@ -35,6 +40,7 @@ export class AuthService {
   }
 
   logout() {
+    
     this.afAuth.auth.signOut();
     this.router.navigate(['login']);
   }
@@ -49,22 +55,27 @@ export class AuthService {
   }
 
   setUserData(email: string, displayName: string, status: string): void {
-    var uuid = firebase.auth().currentUser.uid;
-    console.log("uuid", uuid);
-    firebase.database().ref().child('users').child(uuid).set({
-      email: email,
-      displayName: displayName,
-      status: status
-    })
-    
+    this.currentUserId()
+      .subscribe(user => {
+        if (user) {
+          firebase.database().ref().child('users').child(`${user.uid}`).set({
+            displayName: displayName,
+            email: email,
+            status: status
+          });
+        }
+      });
   }
 
   setUserStatus(status: string): void {
-    var uuid = firebase.auth().currentUser.uid;
-    console.log("uuid", uuid);
-    firebase.database().ref().child('users').child(uuid).set({
-      status: status
-    })
+    this.currentUserId()
+      .subscribe(user => {
+        if (user) {
+          firebase.database().ref().child('users').child(`${user.uid}`).set({
+            status: status
+          });
+        }
+      });
 
   }
 }

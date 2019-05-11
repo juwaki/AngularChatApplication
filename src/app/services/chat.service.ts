@@ -26,7 +26,7 @@ export class ChatService {
       }
 
       this.getUser().forEach((u) => {
-        this.userName = u[1];
+        this.userName = u[0];
         console.log(this.userName);
       });
    
@@ -37,18 +37,11 @@ export class ChatService {
     const userId = this.user.uid;
     console.log(userId);
     const path = `users/${userId}`;
-
-
     this.db.list('users/userId')
     const itemsRef: AngularFireList<ChatMessage> = this.db.list(path);
     this.var1$ = itemsRef.snapshotChanges();
     this.var2$ = itemsRef.valueChanges();
-    
-
-    console.log("the users "+ this.var2$);
-    this.var2$.forEach((u, key) => {
-      console.log(u[2]);
-    });
+ 
     return this.var2$;
   }
 
@@ -56,24 +49,20 @@ export class ChatService {
   getUsers() {
     const userId = this.user.uid;
     console.log(userId);
-    const path = `users/${userId}`;
+    const path = `users/`;
     return this.db.list(path);
   }
 
   sendMessage(msg: string) {
     const timeStamp = this.getTimeStamp();
     const email = this.user.email;
-    //const email = 'test@example.com';
-
     this.chatMessages = this.getMessages();
+    
     var message = {
-
       message: msg,
       timeSent: timeStamp,
       userName: this.userName,
-      //userName: 'test-user',
       email: email
-
     };
     const item = this.db.list('/messages');
     item.push(message);

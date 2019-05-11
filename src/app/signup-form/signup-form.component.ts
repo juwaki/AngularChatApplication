@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css']
 })
-export class SignupFormComponent implements OnInit {
+export class SignupFormComponent  {
   email: string;
   password: string;
   displayName: string;
@@ -19,9 +19,6 @@ export class SignupFormComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) { }
-
-  ngOnInit() {
-  }
 
   signUp() {
     const email = this.email;

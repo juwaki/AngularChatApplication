@@ -47,10 +47,13 @@ export class ChatService {
 
 
   getUsers() {
-    const userId = this.user.uid;
-    console.log(userId);
     const path = `users/`;
-    return this.db.list(path);
+    const itemsRef: AngularFireList<ChatMessage> = this.db.list(path);
+    this.var1$ = itemsRef.snapshotChanges();
+    this.var2$ = itemsRef.valueChanges();
+ 
+    return this.var2$;
+    //return this.db.list(path);
   }
 
   sendMessage(msg: string) {

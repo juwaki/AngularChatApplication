@@ -41,8 +41,10 @@ export class AuthService {
 
   logout() {
     
+    this.setUserStatus('offline');
     this.afAuth.auth.signOut();
     this.router.navigate(['login']);
+    
   }
 
   signUp(email: string, password: string, displayName: string) {
@@ -68,10 +70,12 @@ export class AuthService {
   }
 
   setUserStatus(status: string): void {
+    console.log("set user called ", status)
     this.currentUserId()
       .subscribe(user => {
         if (user) {
-          firebase.database().ref().child('users').child(`${user.uid}`).set({
+          console.log("Hi", status);
+          firebase.database().ref().child('users').child(`${user.uid}`).update({
             status: status
           });
         }

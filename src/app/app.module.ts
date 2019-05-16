@@ -17,6 +17,7 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserItemComponent } from './user-item/user-item.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'; 
 
 
 import { ChatService } from './services/chat.service';
@@ -48,7 +49,8 @@ import * as firebase from 'firebase';
     AngularFireAuthModule,
     AngularFireModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    PickerModule
   ],
   providers: [AuthService, ChatService],
   bootstrap: [AppComponent]

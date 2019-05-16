@@ -27,7 +27,7 @@ export class ChatService {
 
       this.getUser().forEach((u) => {
         this.userName = u[0];
-        console.log(this.userName);
+    //    console.log(this.userName);
       });
    
     });
@@ -35,7 +35,7 @@ export class ChatService {
 
   getUser() {
     const userId = this.user.uid;
-    console.log(userId);
+    //console.log(userId);
     const path = `users/${userId}`;
     this.db.list('users/userId')
     const itemsRef: AngularFireList<ChatMessage> = this.db.list(path);

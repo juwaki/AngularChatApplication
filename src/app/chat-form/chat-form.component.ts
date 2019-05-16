@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'; 
 
 @Component({
   selector: 'app-chat-form',

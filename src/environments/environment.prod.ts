@@ -1,13 +1,14 @@
 export const environment = {
   production: true,
-  firebase: {
-    apiKey: "AIzaSyCJrvO4sUshn2SlHWC-yXohX4ipFEadsZc",
-    authDomain: "chatapplication-b47db.firebaseapp.com",
-    databaseURL: "https://chatapplication-b47db.firebaseio.com",
-    projectId: "chatapplication-b47db",
-    storageBucket: "chatapplication-b47db.appspot.com",
-    messagingSenderId: "182895035852",
-    appId: "1:182895035852:web:47e4ae46ca75c5ad"
-    
-  }
+  firebase : {
+    apiKey: 'AIzaSyAim6IB_nS6tLHwI0vNhu-JjMiK5pc9IDs',
+    authDomain: 'confession-chat.firebaseapp.com',
+    databaseURL: 'https://confession-chat.firebaseio.com',
+    projectId: 'confession-chat',
+    storageBucket: 'confession-chat.appspot.com',
+    messagingSenderId: '953599210186',
+    appId: '1:953599210186:web:8420f07ea7df35b44d7a33',
+    measurementId: 'G-VW7631767F'
+
+  },
 };

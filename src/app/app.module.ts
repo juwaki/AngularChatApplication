@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +24,8 @@ import { ChatService } from './services/chat.service';
 import { AuthService } from './services/auth.service';
 import { appRoutes } from 'src/routes';
 import { environment } from 'src/environments/environment';
-import * as firebase from 'firebase';
+import * as firebase from '@angular/fire/';
+import { AngularFireAuth } from 'angularfire2/node_modules/@angular/fire/auth';
 
 
 
@@ -46,9 +47,9 @@ import * as firebase from 'firebase';
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    AngularFireAuthModule,
     AngularFireModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     PickerModule
   ],

@@ -2,8 +2,8 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { ChatMessage } from '../models/chat-message.model';
 import { Observable } from 'rxjs';
-import { AngularFireList } from 'angularfire2/database';
-import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AngularFireList } from '@angular/fire/database';
+
 
 
 @Component({

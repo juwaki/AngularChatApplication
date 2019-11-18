@@ -11,8 +11,15 @@ export class LoginFormComponent {
   email: string;
   password: string;
   errorMsg: string;
+  spin: boolean;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.spin = true;
+    setTimeout(()=> {
+      this.spin = false;
+      }, 3000);
+
+   }
 
   login() {
     console.log('login() called from login-form component');

@@ -1,4 +1,9 @@
-<div class="container">
+<div [ngClass]="{'loader': spin}" *ngIf="spin">
+  Loading..
+</div>
+<h1 *ngIf="spin">Welcome to Confessions hub! <p *ngIf="spin"style="font-size:12px;">created by @Juwakie</p></h1>
+
+<div class="container" *ngIf="!spin">
     <div class="loginCard">
       <h2 class="heading">Log In</h2>
         <input 
@@ -16,4 +21,8 @@
                 Log In
         </button>
     </div>
+    
+  <footer class="footr">
+    <p>Admin Contact information: <a href="mailto:juwakiledwaba@gmail.com">juwakiledwaba@gmail.com</a>.</p>
+  </footer>
   </div>
